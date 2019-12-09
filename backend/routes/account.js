@@ -67,6 +67,7 @@ router.post('/login', async function (req, res) {
  * database.
  */
 router.post('/create', function (req, res) {
+  
   if (!req.body.name || !req.body.pass) {
     res.status(401).send({msg: 'Expected a payload of name and pass.'});
     return;

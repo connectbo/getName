@@ -1,2 +1,10 @@
 {
+  "users": {
+    "bo": {
+      "passwordHash": "$2b$10$4.TZPSEF8xOGvkKKUjmS0OROed6uhmRgwzWHTxJVQa9CM6GPtbGuO"
+    },
+    "meng": {
+      "passwordHash": "$2b$10$raKyZ7M5pfdJkL2n.Nx7DOGBAo3F6phYyLvkEKfemExbPjBjzpDL."
+    }
+  }
 }
