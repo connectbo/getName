@@ -16,6 +16,9 @@ const app = express();
 app.use(require('morgan')('dev'));
 require('./data/DataStore');
 
+const cors = require('cors');
+app.use(cors())
+
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 app.use(bearerToken());
