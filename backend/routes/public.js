@@ -9,10 +9,10 @@ export const prefix = '/public';
 const {publicStore} = require('../data/DataStore');
 
 
-router.get('/*', parseGet, function (req, res) {
+router.get('/', parseGet, function (req, res) {
   const result = req.handleGet(publicStore);
   if (typeof result !== 'undefined') {
-    res.send({result})
+    res.send(publicStore['_data'])
   }
 });
 
