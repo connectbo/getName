@@ -3,6 +3,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Spotify Playground</title>
     <link
       href="https://fonts.googleapis.com/css?family=Montserrat&display=swap"
       rel="stylesheet"
@@ -11,72 +12,71 @@
       rel="stylesheet"
       href="node_modules/bootstrap/dist/css/bootstrap.css"
     />
-    <link rel="stylesheet" href="style.css" />
     <script
       src="https://kit.fontawesome.com/45834999ca.js"
       crossorigin="anonymous"
     ></script>
-    <title>Spotify Battle Login</title>
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-sm-4 col-md-7" id="left"></div>
-        <div
-          class="col-xs-12 col-sm-8 col-md-5 d-flex align-items-center justify-content-center"
-          id="right"
+    <nav class="bg-dark sticky-top py-1">
+      <div
+        class="container d-flex flex-column flex-md-row justify-content-between"
+      >
+        <span style="font-size: 40px; color: white;">
+          <i class="fab fa-spotify"></i>
+        </span>
+        <a class="py-2 d-none d-md-inline-block text-white" href="signin.html"
+          >Sign in</a
         >
-          <div class="row justify-content-center">
-            <div class="col-12 d-flex justify-content-center">
-              <i class="fas fa-lock mr-3"></i>
-              <p class="lead text-white">Sign in</p>
-            </div>
-            <form class="col-12 mt-2">
-              <div class="form-group mb-0">
-                <label for="user-email" class="text-light lead"
-                  >Email Address</label
-                >
-                <input
-                  type="email"
-                  class="form-control"
-                  placeholder="name@example.com"
-                  id="user-email"
-                  aria-describedby="emailHelp"
-                />
-                <small id="emailHelp" class="form-text text-muted"
-                  >We'll never share your email with anyone else.</small
-                >
-              </div>
-              <div class="form-group mt-2">
-                <label for="user-password" class="text-light lead"
-                  >Password</label
-                >
-                <input
-                  type="password"
-                  class="form-control"
-                  id="user-password"
-                />
-              </div>
-              <button type="submit" class="btn mt-3 col-12" id="submit-form">
-                Submit
-              </button>
-              <div class="row justify-content-between mt-2">
-                <div class="col-5">
-                  <a href="signup.html" class="options" id="create-account"
-                    >Don't have an account?</a
-                  >
-                </div>
-                <div class="col-4">
-                  <a href="" class="options">Forget password?</a>
-                </div>
-              </div>
-            </form>
-          </div>
-        </div>
+        <a class="py-2 d-none d-md-inline-block text-white" href="signup.html"
+          >Sign up</a
+        >
+        <a class="py-2 d-none d-md-inline-block text-white" href="#"
+          >Browsing</a
+        >
+        <a class="py-2 d-none d-md-inline-block text-white" href="#"
+          >About Us</a
+        >
+        <a class="py-2 d-none d-md-inline-block text-white" href="#"
+          >Terms and Conditions</a
+        >
+      </div>
+    </nav>
+    <div
+      class="position-relative overflow-hidden p-3 p-md-5 text-center bg-light"
+      id="landing-img"
+    >
+      <div class="col-md-5 p-lg-5 mx-auto my-5 bg-light" id="landing-text">
+        <h1 class="display-4 font-weight-normal">Share Music</h1>
+        <p class="lead font-weight-normal">
+          See what others are listening to, discover new playlists and make
+          friends with similar music taste
+        </p>
       </div>
     </div>
-    <script src="node_modules/jquery/dist/jquery.js"></script>
-    <script src="node_modules/axios/dist/axios.js"></script>
-    <script src="index.js"></script>
+    <hr class="shadow" />
+    <div class="row">
+      <div class="col-md-5 bg-dark mx-5 my-2 text-center text-white">
+        <div class="my-3 py-3">
+          <h2 class="display-5">Popular Playlist</h2>
+          <p class="lead">Click to see</p>
+        </div>
+        <div
+          class="bg-light box-shadow mx-auto"
+          style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;"
+        ></div>
+      </div>
+      <div class="col-md-5 bg-light mx-5 my-2 text-center text-dark">
+        <div class="my-3 py-3">
+          <h2 class="display-5">Popular Playlist</h2>
+          <p class="lead">click to see</p>
+        </div>
+        <div
+          class="bg-dark box-shadow mx-auto"
+          style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;"
+        ></div>
+      </div>
+    </div>
   </body>
 </html>

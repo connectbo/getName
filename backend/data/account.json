@@ -5,6 +5,9 @@
     },
     "meng": {
       "passwordHash": "$2b$10$raKyZ7M5pfdJkL2n.Nx7DOGBAo3F6phYyLvkEKfemExbPjBjzpDL."
+    },
+    "testuser": {
+      "passwordHash": "$2b$10$ykL/USVn5TheuvCLM0EWZ.Pa5/7PNPThG6lZrKLqN.yOs/wweFIxK"
     }
   }
 }
