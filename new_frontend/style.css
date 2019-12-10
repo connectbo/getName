@@ -41,3 +41,14 @@ i.fas {
 .options {
   color: #2196f3;
 }
+
+#landing-img {
+  background-image: url("img/landing.jpg");
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Do not repeat the image */
+  background-size: cover;
+}
+
+#landing-text {
+  opacity: 0.85;
+}
