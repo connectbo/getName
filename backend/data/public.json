@@ -449,18 +449,6 @@
       }
     ],
     "likes": {
-<<<<<<< HEAD
-      "37i9dQZF1DXbm6HfkbMtFZ": 25,
-      "37i9dQZF1DXcBWIGoYBM5M": 0,
-      "37i9dQZF1DX0A8zVl7p82B": 1,
-      "37i9dQZF1DX1tW4VlEfDSS": 0,
-      "37i9dQZF1DWY4xHQp97fN6": 1,
-      "37i9dQZF1DXcDxnC0UqHJa": 0,
-      "37i9dQZF1DX44dZ4p5QLf4": 4,
-      "37i9dQZF1DWWQRwui0ExPn": 0,
-      "37i9dQZF1DWUvHZA1zLcjW": 0,
-      "37i9dQZF1DX50QitC6Oqtn": 1,
-=======
       "37i9dQZF1DXbm6HfkbMtFZ": 76,
       "37i9dQZF1DXcBWIGoYBM5M": 19,
       "37i9dQZF1DX0A8zVl7p82B": 4,
@@ -471,22 +459,14 @@
       "37i9dQZF1DWWQRwui0ExPn": 2,
       "37i9dQZF1DWUvHZA1zLcjW": 1,
       "37i9dQZF1DX50QitC6Oqtn": 2,
->>>>>>> 1ca08c3d239a7d1cb0cd448cf4953068beb142fd
       "37i9dQZF1DX79Y9Kr2M2tM": 3,
       "37i9dQZF1DXbTxeAdrVG2l": 18
     }
   },
   "like": {
-<<<<<<< HEAD
-    "id": "37i9dQZF1DX44dZ4p5QLf4"
-  },
-  "unlike": {
-    "id": "37i9dQZF1DXbm6HfkbMtFZ"
-=======
     "id": "37i9dQZF1DX50QitC6Oqtn"
   },
   "unlike": {
     "id": "37i9dQZF1DX50QitC6Oqtn"
->>>>>>> 1ca08c3d239a7d1cb0cd448cf4953068beb142fd
   }
 }
