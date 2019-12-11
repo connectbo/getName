@@ -17,12 +17,13 @@ const {userStore} = require('../data/DataStore');
  */
 router.use([authenticateUser, modifyUserPath]);
 
-router.get('/callback', parseGet, function (req, res) {
+router.get('/playlist', parseGet, function (req, res) {
   const code = req.query.code;
-  res.send({'Token': code})
-  // const result = req.handleGet(userStore);
-  // if (typeof result !== 'undefined') {
-  // }
+  // res.send({'Token': code})
+  const result = req.handleGet(userStore);
+  if (typeof result !== 'undefined') {
+    console.log(code);
+  }
 });
 
 router.post('/*', parsePost, function (req, res) {
