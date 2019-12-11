@@ -9,9 +9,9 @@
     />
     <link
       rel="stylesheet"
-      href="node_modules/bootstrap/dist/css/bootstrap.css"
+      href="../node_modules/bootstrap/dist/css/bootstrap.css"
     />
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="../style.css" />
     <script
       src="https://kit.fontawesome.com/45834999ca.js"
       crossorigin="anonymous"
@@ -28,8 +28,8 @@
         >
           <div class="row justify-content-center">
             <div class="col-12 d-flex justify-content-center">
-              <i class="fas fa-lock mr-3"></i>
-              <p class="lead text-white">Sign in</p>
+              <i class="fas fa-user-plus mr-3"></i>
+              <p class="lead text-white">Sign Up</p>
             </div>
             <form class="col-12 mt-2">
               <div class="form-group mb-0">
@@ -38,7 +38,7 @@
                 >
                 <input
                   type="email"
-                  class="form-control"
+                  class="form-control text-light"
                   placeholder="name@example.com"
                   id="user-email"
                   aria-describedby="emailHelp"
@@ -53,30 +53,31 @@
                 >
                 <input
                   type="password"
-                  class="form-control"
+                  class="form-control text-light"
                   id="user-password"
                 />
               </div>
-              <button type="button" class="btn mt-3 col-12" id="submit-form">
+              <div class="form-group mt-2">
+                <label for="repeat-password" class="text-light lead"
+                  >Re-Enter Password</label
+                >
+                <input
+                  type="password"
+                  class="form-control text-light"
+                  id="repeat-password"
+                />
+              </div>
+              <button type="button" class="btn mt-3 col-12" id="submit-sign">
                 Submit
               </button>
-              <div class="row justify-content-between mt-2">
-                <div class="col-5">
-                  <a href="signup.html" class="options" id="create-account"
-                    >Don't have an account?</a
-                  >
-                </div>
-                <div class="col-4">
-                  <a href="" class="options">Forget password?</a>
-                </div>
-              </div>
             </form>
           </div>
         </div>
       </div>
     </div>
-    <script src="node_modules/jquery/dist/jquery.js"></script>
-    <script src="node_modules/axios/dist/axios.js"></script>
-    <script src="signin.js"></script>
+    <script src="../node_modules/jquery/dist/jquery.js"></script>
+    <script src="../node_modules/axios/dist/axios.js"></script>
+    <script src="../signin/signin.js"></script>
+    <script src="signup.js"></script>
   </body>
 </html>
