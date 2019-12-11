@@ -1,4 +1,5 @@
 const listGallery = $("#playlists");
+// function to add playlist to front page
 async function addList() {
   try {
     const result = await axios({
@@ -17,6 +18,7 @@ async function addList() {
   }
 }
 
+//function to like a playlist
 $(document).on("click", ".like", async function() {
   try {
     const id = $(this).parentsUntil("#playlists")[1].id;
@@ -29,13 +31,38 @@ $(document).on("click", ".like", async function() {
         }
       }
     });
-    console.log(result.data);
-    // $("#" + id + " .like-counts").text(`${result.data}`);
+    $("#" + id + " .like-counts").text(`${result.data[id]} Likes`);
+    $("#" + id + " .like").replaceWith(
+      `<i class="fas fa-heart clickable p-2 rounded unlike" ></i>`
+    );
   } catch (error) {
     console.log(error);
   }
 });
 
+//function to unlike a playlist
+$(document).on("click", ".unlike", async function() {
+  try {
+    const id = $(this).parentsUntil("#playlists")[1].id;
+    const result = await axios({
+      method: "post",
+      url: "http://localhost:3000/public/unlike",
+      data: {
+        data: {
+          id: id
+        }
+      }
+    });
+    $("#" + id + " .like-counts").text(`${result.data[id]} Likes`);
+    $("#" + id + " .unlike").replaceWith(
+      `<i class="far fa-heart clickable p-2 rounded like" ></i>`
+    );
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+//function to generate playlist html for frontpage
 function generateHTML(el, likes) {
   const htmlToAdd = `<div class="col-md-4 bg-dark mx-5 mt-2 mb-4 text-center text-white rounded shadow" id=${
     el.id
@@ -52,7 +79,7 @@ function generateHTML(el, likes) {
       background-size: cover;"
     ></div>
     <div class="text-white my-4">
-    <span class="mx-3 like-counts"> ${likes[el.id]} Likes</span>
+    <span class="mx-3 like-counts" > ${likes[el.id]} Likes</span>
     ${
       el.likes == 0
         ? '<i class="far fa-heart clickable p-2 rounded like" >'
@@ -60,4 +87,6 @@ function generateHTML(el, likes) {
     }</div>`;
   return htmlToAdd;
 }
+
+//add playlist to page
 addList();
