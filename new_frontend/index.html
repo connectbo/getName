@@ -55,31 +55,15 @@
         </p>
       </div>
     </div>
-    <h4 class="text-muted text-uppercase text-center display-4 mt-4">
-      Featured Public Playlist
-    </h3>
-    <hr class="shadow" />
-    <div class="row">
-      <div class="col-md-5 bg-dark mx-5 my-2 text-center text-white">
-        <div class="my-3 py-3">
-          <h2 class="display-5">Popular Playlist</h2>
-          <p class="lead">Click to see</p>
-        </div>
-        <div
-          class="bg-light box-shadow mx-auto"
-          style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;"
-        ></div>
-      </div>
-      <div class="col-md-5 bg-light mx-5 my-2 text-center text-dark">
-        <div class="my-3 py-3">
-          <h2 class="display-5">Popular Playlist</h2>
-          <p class="lead">click to see</p>
-        </div>
-        <div
-          class="bg-dark box-shadow mx-auto"
-          style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;"
-        ></div>
-      </div>
+    <div class="bg-light">
+      <h4 class="text-muted text-uppercase text-center display-4 mt-4">
+        Featured Public Playlist
+      </h4>
+      <hr class="shadow" />
+      <div class="row justify-content-center" id="playlists"></div>
     </div>
+    <script src="node_modules/jquery/dist/jquery.js"></script>
+    <script src="node_modules/axios/dist/axios.js"></script>
+    <script src="index.js"></script>
   </body>
 </html>
