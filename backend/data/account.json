@@ -8,6 +8,12 @@
     },
     "testuser": {
       "passwordHash": "$2b$10$ykL/USVn5TheuvCLM0EWZ.Pa5/7PNPThG6lZrKLqN.yOs/wweFIxK"
+    },
+    "test": {
+      "passwordHash": "$2b$10$9whTAoiyWCMviDd3mduT0eCzU.qm7h72AUCq980.h8BtQ.qFc29fK"
+    },
+    "asdf": {
+      "passwordHash": "$2b$10$q8LuDU4pj5bA7kIlK3vV8epFvF5rdvcVV.sSwhyw9yyZWvNnOVrQ2"
     }
   }
 }
