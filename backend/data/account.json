@@ -14,6 +14,11 @@
     },
     "asdf": {
       "passwordHash": "$2b$10$q8LuDU4pj5bA7kIlK3vV8epFvF5rdvcVV.sSwhyw9yyZWvNnOVrQ2"
+    },
+    "test@gmail": {
+      "com": {
+        "passwordHash": "$2b$10$RxNzwEZ.J2RnZY.rXBxPfe3j5yVMrjUQvUqSDB782.afK6PjhKVoS"
+      }
     }
   }
 }

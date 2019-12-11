@@ -51,7 +51,7 @@ async function renderPage(username, password, jwt) {
     <div class="py-2 d-none d-md-inline-block">
     <a class="text-white" href="../logout/logout.html" id="logout">Log out</a>
     <span class="text-white mx-3">/</span>
-    <a class="text-white" href="..account/account.html" id="account">My Account</a>
+    <a class="text-white" href="../account/account.html" id="account">My Account</a>
   </div>`);
   } catch (error) {
     console.log(error);
