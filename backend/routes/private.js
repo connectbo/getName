@@ -17,10 +17,10 @@ const {privateStore} = require('../data/DataStore');
  */
 router.use(authenticateUser);
 
-router.get('/*', parseGet, function (req, res) {
+router.get('/', parseGet, function (req, res) {
   const result = req.handleGet(privateStore);
   if (typeof result !== 'undefined') {
-    res.send({result})
+    res.send(privateStore['_data']['playlists'])
   }
 });
 
