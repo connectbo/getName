@@ -5,6 +5,7 @@ async function addList() {
       method: "get",
       url: "http://localhost:3000/public"
     });
+    console.log(result);
     const lists = result.data.playlists.items;
     for (let i = 0; i < lists.length; i++) {
       const htmlToAdd = `<div class="col-md-4 bg-dark mx-5 mt-2 mb-4 text-center text-white rounded shadow">
