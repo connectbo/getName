@@ -52,3 +52,9 @@ i.fas {
 #landing-text {
   opacity: 0.85;
 }
+
+.clickable:hover {
+  background-color: black;
+  opacity: 0.6;
+  cursor: pointer;
+}
