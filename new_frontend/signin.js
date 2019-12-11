@@ -12,21 +12,31 @@ $("#submit-form").click(async function() {
       }
     });
     const jwt = result.data.jwt;
-    const account = await axios({
-      method: "get",
-      url: "http://localhost:3000/account/status",
-      headers: {
-        Authorization: "Bearer " + jwt
-      },
-      data: {
-        name: name,
-        pass: pass
-      }
-    });
-    accountInfo = account.data;
-
-    // window.location.href = "home.html/" + name;
+    setCookie("username", name, 20);
+    setCookie("password", pass, 20);
+    setCookie("jwt", jwt, 20);
+    // const account = await axios({
+    //   method: "get",
+    //   url: "http://localhost:3000/account/status",
+    //   headers: {
+    //     Authorization: "Bearer " + jwt
+    //   },
+    //   data: {
+    //     name: name,
+    //     pass: pass
+    //   }
+    // });
+    // accountInfo = account.data;
+    window.location.href = "home.html";
   } catch (error) {
     console.log(error);
   }
 });
+
+//function to create a cookie, reference from https://www.w3schools.com/js/js_cookies.asp
+function setCookie(cname, cvalue, exmins) {
+  const d = new Date();
+  d.setTime(d.getTime() + exmins * 60 * 1000);
+  const expires = "expires=" + d.toUTCString();
+  document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
