@@ -77,7 +77,7 @@ function generateHTML(el) {
   const htmlToAdd = `<div class="col-md-4 col-lg-3 bg-dark mx-5 mt-2 mb-4 text-center text-white rounded shadow" id=${el.id}>
     <div class="my-3 py-3" >
       <h2 class="display-5">
-      ${el.name}</h2> 
+      <a class="text-light" href=${el.external_urls.spotify}>${el.name}</a></h2> 
     </div>
     <div
       class="bg-light box-shadow mx-auto"
@@ -198,8 +198,8 @@ async function renderList(id) {
 
 //function to delete a comment
 $(document).on("click", ".delete-comment", async function() {
-  const commentId = $(this).parent()[0].id;
-  const id = $(this).parents()[2].id;
+  const commentId = $(this).parents()[1].id;
+  const id = $(this).parents()[3].id;
   try {
     const delete_result = await axios({
       method: "delete",

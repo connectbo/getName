@@ -19,6 +19,9 @@
       "com": {
         "passwordHash": "$2b$10$RxNzwEZ.J2RnZY.rXBxPfe3j5yVMrjUQvUqSDB782.afK6PjhKVoS"
       }
+    },
+    "musicfan": {
+      "passwordHash": "$2b$10$zu5No/Gt5z3yBPeMvjyXlOmRIyPtSfsUWZKj3PP9YZsDUMXR.8.rO"
     }
   }
 }
