@@ -62,12 +62,68 @@ function generateHTML(el) {
     ></div>
     <div class="text-white my-4 row">
     <div class="col-5 d-flex align-items-center flex-row">
-    <span class="mx-3 like-counts" > ${el.likes} Likes</span>
-    <i class="far fa-heart clickable p-2 rounded like" ></i></div>
+    <span class="mx-3 like-counts" > ${el.likes.length} Likes</span></div>
     <div class="col-7 d-flex align-items-center flex-row">
-    <span class="mx-3 clickable p-1 rounded comment-counts" > ${el.comments.length} Comments</span>
-    <i class="far fa-comment clickable p-2 rounded comments" ></i></div>
+    <span class="mx-3 p-1 clickable rounded comment-counts" > ${el.comments.length} Comments</span>
     </div>
     </div>`;
   return htmlToAdd;
+}
+
+//function to see all comments
+$(document).on("click", ".comment-counts", async function() {
+  const id = $(this).parents()[3].id;
+  const commentList = $(
+    `<ul class='list-group list-group-flus text-dark mt-2'></ul>`
+  );
+  try {
+    const result = await axios({
+      method: "get",
+      headers: {
+        Authorization: "Bearer " + jwt
+      },
+      url: "http://localhost:3000/private/"
+    });
+    const lists = result.data.filter(el => el.id == id);
+    const el = lists[0].comments;
+    for (let j = 0; j < el.length; j++) {
+      if (el[j].user == user) {
+        commentList.append(
+          `<li class="list-group-item d-flex justify-content-between" id=${el[j].id}>${el[j].body} <div><button class="btn delete-comment">Delete</button></div></li>`
+        );
+      } else {
+        commentList.append(
+          `<li class="list-group-item" id=${el[j].id}>${el[j].body}</li>`
+        );
+      }
+    }
+    $("#" + id).html(commentList);
+    $("#" + id).append(`<button class="btn go-back my-4">back</button>`);
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+$(document).on("click", ".go-back", async function() {
+  const id = $(this).parents()[0].id;
+  renderList(id);
+});
+
+//function to update single list
+async function renderList(id) {
+  try {
+    const result = await axios({
+      method: "get",
+      headers: {
+        Authorization: "Bearer " + jwt
+      },
+      url: "http://localhost:3000/private/"
+    });
+    const lists = result.data;
+    const el = lists.filter(el => el.id == id);
+    const content = generateHTML(el[0]);
+    $("#" + id).replaceWith(content);
+  } catch (error) {
+    console.log(error);
+  }
 }

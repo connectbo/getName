@@ -47,9 +47,9 @@ async function renderPage(username, password, jwt) {
       }
     });
 
-    const user = account.data.user.name;
+    // const user = account.data.user.name;
     $("nav .container").append(`
-    <div class="py-2 d-none d-md-inline-block">
+    <div class="py-2 d-md-inline-block">
     <a class="text-white" href="../logout/logout.html" id="logout">Log out</a>
     <span class="text-white mx-3">/</span>
     <a class="text-white" href="../account/account.html" id="account">My Account</a>
@@ -74,10 +74,14 @@ async function renderPage(username, password, jwt) {
 }
 
 function generateHTML(el) {
-  const htmlToAdd = `<div class="col-md-4 col-lg-3 bg-dark mx-5 mt-2 mb-4 text-center text-white rounded shadow" id=${el.id}>
+  const htmlToAdd = `<div class="col-md-4 col-lg-3 bg-dark mx-5 mt-2 mb-4 text-center text-white rounded shadow" id=${
+    el.id
+  }>
     <div class="my-3 py-3" >
       <h2 class="display-5">
-      <a class="text-light" href=${el.external_urls.spotify}>${el.name}</a></h2> 
+      <a class="text-light" href=${el.external_urls.spotify}>${
+    el.name
+  }</a></h2> 
     </div>
     <div
       class="bg-light box-shadow mx-auto"
@@ -88,10 +92,17 @@ function generateHTML(el) {
     ></div>
     <div class="text-white my-4 row">
     <div class="col-5 d-flex align-items-center flex-row">
-    <span class="mx-3 like-counts" > ${el.likes} Likes</span>
-    <i class="far fa-heart clickable p-2 rounded like" ></i></div>
+    <span class="mx-3 like-counts" > ${el.likes.length} Likes</span>
+    ${
+      el.likes.includes(user)
+        ? '<i style="font-size:20px" class="fas fa-heart clickable p-2 rounded unlike" ></i>'
+        : '<i class="far fa-heart clickable p-2 rounded like" ></i>'
+    }
+    </div>
     <div class="col-7 d-flex align-items-center flex-row">
-    <span class="mx-3 clickable p-1 rounded comment-counts" > ${el.comments.length} Comments</span>
+    <span class="mx-3 clickable p-1 rounded comment-counts" > ${
+      el.comments.length
+    } Comments</span>
     <i class="far fa-comment clickable p-2 rounded comments" ></i></div>
     </div>
     </div>`;
@@ -256,7 +267,6 @@ async function renderComment(commentList, id) {
 $(document).on("click", ".like", async function() {
   try {
     const id = $(this).parentsUntil("#playlists")[2].id;
-    console.log(id);
     const result = await axios({
       method: "post",
       headers: {
@@ -270,11 +280,76 @@ $(document).on("click", ".like", async function() {
         }
       }
     });
-    // $("#" + id + " .like-counts").text(`${result.data[id]} Likes`);
-    // $("#" + id + " .like").replaceWith(
-    //   `<i class="fas fa-heart clickable p-2 rounded unlike" ></i>`
-    // );
+    $("#" + id + " .like-counts").text(`${result.data[id]} Likes`);
+    $("#" + id + " .like").replaceWith(
+      `<i style="font-size:20px" class="fas fa-heart clickable p-2 rounded unlike" ></i>`
+    );
   } catch (error) {
     console.log(error);
   }
 });
+
+//function to unlike a playlist
+$(document).on("click", ".unlike", async function() {
+  try {
+    const id = $(this).parentsUntil("#playlists")[2].id;
+    const result = await axios({
+      method: "post",
+      headers: {
+        Authorization: "Bearer " + jwt
+      },
+      url: "http://localhost:3000/private/unlike",
+      data: {
+        data: {
+          id: id,
+          user: user
+        }
+      }
+    });
+    $("#" + id + " .like-counts").text(`${result.data[id]} Likes`);
+    $("#" + id + " .unlike").replaceWith(
+      `<i class="far fa-heart clickable p-2 rounded like" ></i>`
+    );
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+//reference from https://medium.com/@TCAS3/debounce-deep-dive-javascript-es6-e6f8d983b7a1
+const debounce = (fn, time) => {
+  let timeout;
+
+  return function() {
+    const functionCall = () => fn.apply(this, arguments);
+
+    clearTimeout(timeout);
+    timeout = setTimeout(functionCall, time);
+  };
+};
+//function for auto complete
+$("#search-list").on("keydown", debounce(getSuggestion, 500));
+
+async function getSuggestion() {
+  const searchWords = $(this).val();
+  console.log(searchWords);
+  try {
+    const result = await axios({
+      method: "get",
+      headers: {
+        Authorization: "Bearer " + jwt
+      },
+      url: "http://localhost:3000/private/search",
+      data: {
+        data: {
+          term: searchWords
+        }
+      }
+    });
+    console.log(result);
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+// //function to search playlist
+// $(document).on("click", "submit-search", function() {});

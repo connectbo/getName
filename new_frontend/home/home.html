@@ -23,9 +23,11 @@
       <div
         class="container d-flex flex-column flex-md-row justify-content-between"
       >
-        <span style="font-size: 40px; color: white;">
-          <i class="fab fa-spotify"></i>
-        </span>
+        <div class="d-none d-md-inline-block">
+          <span style="font-size: 30px; color: white;">
+            <i class="fab fa-spotify"></i>
+          </span>
+        </div>
       </div>
     </nav>
     <div class="container-fluid">
@@ -33,6 +35,14 @@
         Featured User Playlist
       </h4>
       <hr class="shadow" />
+      <div class="container">
+        <div class="row justify-content-center my-5">
+          <input type="text" class="form-control col-7 mx-3" id="search-list" />
+          <button class="btn bg-dark text-white col-3 mx-5" id="submit-search">
+            Search Playlist
+          </button>
+        </div>
+      </div>
       <div class="row justify-content-center" id="user-gallery"></div>
     </div>
     <script src="../node_modules/jquery/dist/jquery.js"></script>
