@@ -104,6 +104,8 @@ router.post('/store_playlist', parsePost, function (req, res) {
 
   const _user = req.body.data.user;
   const _token = req.body.data.token;
+
+  const pre_playlist = privateStore.get('playlists')
   fetch('https://api.spotify.com/v1/me/playlists', {
     method: 'GET',
     headers: {
@@ -119,7 +121,8 @@ router.post('/store_playlist', parsePost, function (req, res) {
         formatted_playlist[i]['likes'] = 0;
         formatted_playlist[i]['comments'] = new Array();
       }
-      privateStore.set(`playlists`, formatted_playlist)
+      pre_playlist.push(formatted_playlist);
+      privateStore.set(`playlists`, pre_playlist)
     })
   if (typeof result !== 'undefined') {
     res.send({ result })
