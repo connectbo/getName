@@ -26,37 +26,48 @@ router.get('/', parseGet, function (req, res) {
 
 router.post('/like', parsePost, function (req, res) {
   const _id = req.body.data.id;
+  const _user = req.body.data.user;
   const result = req.handlePost(privateStore);
   let playlists = privateStore['_data']['playlists'];
   for (let i in playlists) {
     if (playlists[i]['id'] == _id) {
-      let pre_likes = playlists[i]['likes'] + 1;
-      playlists[i]['likes']++;
-      privateStore.set('playlists', playlists);
-      const toReturn = {};
-      toReturn[_id] = pre_likes;
-      res.send(toReturn);
-      break;
+      if (playlists[i]['likes'].includes(_user)) {
+        res.sendStatus(404);
+      }
+      else {
+        playlists[i]['likes'].push(_user);
+        privateStore.set('playlists', playlists);
+        const toReturn = {};
+        toReturn[_id] = playlists[i]['likes'].length;
+        res.send(toReturn);
+        break;
+      }
     }
   }
 })
 
 router.post('/unlike', parsePost, function (req, res) {
   const _id = req.body.data.id;
+  const _user = req.body.data.user;
   const result = req.handlePost(privateStore);
   let playlists = privateStore['_data']['playlists'];
   for (let i in playlists) {
     if (playlists[i]['id'] == _id) {
-      let pre_likes = playlists[i]['likes'] - 1;
-      playlists[i]['likes']--;
-      privateStore.set('playlists', playlists);
-      const toReturn = {};
-      toReturn[_id] = pre_likes;
-      res.send(toReturn);
-      break;
+      if (playlists[i]['likes'].includes(_user)) {
+        let _index = playlists[i]['likes'].indexOf(_user)
+        playlists[i]['likes'].splice(_index, 1);
+        privateStore.set('playlists', playlists);
+        const toReturn = {};
+        toReturn[_id] = playlists[i]['likes'].length;
+        res.send(toReturn);
+        break;
+        }
+      else {
+          res.sendStatus(403);
+        }
+      }
     }
-  }
-})
+  })
 
 router.post('/comment', parsePost, function (req, res) {
   const result = req.handlePost(privateStore);
@@ -86,8 +97,8 @@ router.delete('/comment', parsePost, function (req, res) {
   const _commentid = req.body.data.id;
   const _playlistid = req.body.data.playlist_id;
   for (let i in playlists) {
-    if(playlists[i]['id'] == _playlistid){
-      for (let j in playlists[i]['comments']){
+    if (playlists[i]['id'] == _playlistid) {
+      for (let j in playlists[i]['comments']) {
         if (playlists[i]['comments'][j]['id'] == _commentid) {
           playlists[i]['comments'].splice(j, 1);
           privateStore.set('playlists', playlists);
