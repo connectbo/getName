@@ -10,6 +10,7 @@ export const router = express.Router();
 export const prefix = '/user';
 
 const { userStore } = require('../data/DataStore');
+const { privateStore } = require("../data/DataStore");
 
 /**
  * Every request needs to be from a logged in user.

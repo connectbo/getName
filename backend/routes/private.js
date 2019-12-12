@@ -24,6 +24,23 @@ router.get("/", parseGet, function(req, res) {
   }
 });
 
+router.get("/search", parseGet, function(req, res){
+  const result = req.handleGet(privateStore);
+  const _term = req.query.term;
+  const _suggestion = new Array();
+  for (let i in privateStore["_data"]["playlists"]){
+    let toUpper = privateStore["_data"]["playlists"][i]['name'].toUpperCase();
+    let UpperTerm = _term.toUpperCase();
+    let _index = toUpper.indexOf(UpperTerm);
+    if(_index !== -1){
+      _suggestion.push(privateStore["_data"]["playlists"][i]['name']);
+    }
+  }
+  if (typeof result !== "undefined") {
+    res.send({_suggestion});
+  }
+})
+
 router.post("/like", parsePost, function(req, res) {
   const _id = req.body.data.id;
   const _user = req.body.data.user;
