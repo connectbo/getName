@@ -251,3 +251,30 @@ async function renderComment(commentList, id) {
     console.log(error);
   }
 }
+
+//function to like a playlist
+$(document).on("click", ".like", async function() {
+  try {
+    const id = $(this).parentsUntil("#playlists")[2].id;
+    console.log(id);
+    const result = await axios({
+      method: "post",
+      headers: {
+        Authorization: "Bearer " + jwt
+      },
+      url: "http://localhost:3000/private/like",
+      data: {
+        data: {
+          id: id,
+          user: user
+        }
+      }
+    });
+    // $("#" + id + " .like-counts").text(`${result.data[id]} Likes`);
+    // $("#" + id + " .like").replaceWith(
+    //   `<i class="fas fa-heart clickable p-2 rounded unlike" ></i>`
+    // );
+  } catch (error) {
+    console.log(error);
+  }
+});
