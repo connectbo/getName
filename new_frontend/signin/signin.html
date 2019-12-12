@@ -21,9 +21,9 @@
   <body>
     <div class="container-fluid">
       <div class="row">
-        <div class="col-sm-4 col-md-7" id="left"></div>
+        <div class="col-sm-4 col-md-7 d-none d-sm-block" id="left"></div>
         <div
-          class="col-xs-12 col-sm-8 col-md-5 d-flex align-items-center justify-content-center"
+          class="col-xs-12 col-sm-8 col-md-5 d-flex align-items-center justify-content-center vh-100"
           id="right"
         >
           <div class="row justify-content-center">
@@ -38,7 +38,7 @@
                 >
                 <input
                   type="email"
-                  class="form-control"
+                  class="form-control text-light"
                   placeholder="name@example.com"
                   id="user-email"
                   aria-describedby="emailHelp"
@@ -53,7 +53,7 @@
                 >
                 <input
                   type="password"
-                  class="form-control"
+                  class="form-control text-light"
                   id="user-password"
                 />
               </div>
@@ -62,7 +62,10 @@
               </button>
               <div class="row justify-content-between mt-2">
                 <div class="col-5">
-                  <a href="signup.html" class="options" id="create-account"
+                  <a
+                    href="../signup/signup.html"
+                    class="options"
+                    id="create-account"
                     >Don't have an account?</a
                   >
                 </div>
@@ -70,6 +73,7 @@
                   <a href="" class="options">Forget password?</a>
                 </div>
               </div>
+              <div id="warning" class="text-danger mt-3"></div>
             </form>
           </div>
         </div>

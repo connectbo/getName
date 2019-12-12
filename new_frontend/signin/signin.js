@@ -12,11 +12,12 @@ $("#submit-form").click(async function() {
       }
     });
     const jwt = result.data.jwt;
-    setCookie("username", name, 20);
-    setCookie("password", pass, 20);
-    setCookie("jwt", jwt, 20);
+    setCookie("username", name, 30);
+    setCookie("password", pass, 30);
+    setCookie("jwt", jwt, 30);
     window.location.href = "../home/home.html";
   } catch (error) {
+    $("#warning").text("wrong email address or password");
     console.log(error);
   }
 });
