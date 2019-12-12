@@ -128,7 +128,7 @@ router.post("/store_playlist", parsePost, function(req, res) {
       let formatted_playlist = playlist["items"];
       for (let i in formatted_playlist) {
         formatted_playlist[i]["app_username"] = _user;
-        formatted_playlist[i]["likes"] = 0;
+        formatted_playlist[i]["likes"] = new Array();
         formatted_playlist[i]["comments"] = new Array();
       }
       let final_array = pre_playlist.concat(formatted_playlist);
