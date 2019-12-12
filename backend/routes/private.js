@@ -24,7 +24,27 @@ router.get('/', parseGet, function (req, res) {
   }
 });
 
+router.post('/comment', parsePost, function (req, res){
+  const result = req.handlePost(privateStore);
+  let playlists = privateStore['_data']['playlists'];
+  const _comment = {
+    "user": req.body.data.user,
+    "body": req.body.data.body
+  }
+  const _targetid = req.body.data.targetid;
+  for(let i in playlists){
+    if(playlists[i]['id'] == _targetid){
+      playlists[i]['comments'].push(_comment);
+      privateStore.set('playlists',playlists);
+      break;
+    }
+  }
+  res.sendStatus(200);
+})
+
 router.post('/store_playlist', parsePost, function (req, res) {
+  const result = req.handlePost(privateStore);
+
   const _user = req.body.data.user;
   const _token = req.body.data.token;
   fetch('https://api.spotify.com/v1/me/playlists', {
@@ -40,12 +60,10 @@ router.post('/store_playlist', parsePost, function (req, res) {
       for (let i in formatted_playlist){
         formatted_playlist[i]['app_username'] = _user;
         formatted_playlist[i]['likes'] = 0;
-        formatted_playlist[i]['comments'] = [];
+        formatted_playlist[i]['comments'] = new Array();
       }
       privateStore.set(`playlists`,formatted_playlist)
     })
-
-  const result = req.handlePost(privateStore);
   if (typeof result !== 'undefined') {
     res.send({result})
   }
