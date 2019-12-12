@@ -41,6 +41,23 @@ router.post('/like', parsePost, function (req, res) {
   }
 })
 
+router.post('/unlike', parsePost, function (req, res) {
+  const _id = req.body.data.id;
+  const result = req.handlePost(privateStore);
+  let playlists = privateStore['_data']['playlists'];
+  for (let i in playlists) {
+    if (playlists[i]['id'] == _id) {
+      let pre_likes = playlists[i]['likes'] - 1;
+      playlists[i]['likes']--;
+      privateStore.set('playlists', playlists);
+      const toReturn = {};
+      toReturn[_id] = pre_likes;
+      res.send(toReturn);
+      break;
+    }
+  }
+})
+
 router.post('/comment', parsePost, function (req, res) {
   const result = req.handlePost(privateStore);
   let playlists = privateStore['_data']['playlists'];

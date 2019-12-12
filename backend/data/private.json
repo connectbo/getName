@@ -55,7 +55,7 @@
       "type": "playlist",
       "uri": "spotify:playlist:4TWyptkhzzavlgoOQXsOTr",
       "app_username": "bo",
-      "likes": 5,
+      "likes": 3,
       "comments": [
         {
           "user": "meng",
@@ -114,6 +114,9 @@
     }
   ],
   "like": {
+    "id": "4TWyptkhzzavlgoOQXsOTr"
+  },
+  "unlike": {
     "id": "4TWyptkhzzavlgoOQXsOTr"
   }
 }
