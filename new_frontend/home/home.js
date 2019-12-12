@@ -91,14 +91,163 @@ function generateHTML(el) {
     <span class="mx-3 like-counts" > ${el.likes} Likes</span>
     <i class="far fa-heart clickable p-2 rounded like" ></i></div>
     <div class="col-7 d-flex align-items-center flex-row">
-    <span class="mx-3 comment-counts clickable p-1 rounded" > ${el.comments.length} Comments</span>
+    <span class="mx-3 clickable p-1 rounded comment-counts" > ${el.comments.length} Comments</span>
     <i class="far fa-comment clickable p-2 rounded comments" ></i></div>
     </div>
     </div>`;
   return htmlToAdd;
 }
 
-$(document).on("click", ".comments", async function() {
+//function to render comment box
+$(document).on("click", ".comments", function() {
   const id = $(this).parentsUntil("#user-gallery")[2].id;
-  const commentHTML = ``;
+  const commentHTML = `<div class="col-md-4 col-lg-3 bg-dark mx-5 mt-2 mb-4 text-center text-white rounded shadow" id=${id}>
+  <textarea rows="8" class="form-control rounded-lg mt-3 comment-content"></textarea>
+  <button class="btn btn-outline-light bg-dark text-white my-5 send-comment"  type="button" >Reply</button>
+  <button class="btn btn-outline-light bg-dark text-white my-5 cancel-comment" type="button">Cancel</button></div>`;
+  $("#" + id).replaceWith(commentHTML);
 });
+
+//function to cancel comment
+$(document).on("click", ".cancel-comment", async function() {
+  const id = $(this).parents()[0].id;
+  renderList(id);
+});
+
+//function to post comment
+$(document).on("click", ".send-comment", async function() {
+  const id = $(this).parents()[0].id;
+  const comment = $(this)
+    .prev()
+    .val();
+  try {
+    const result = await axios({
+      method: "post",
+      headers: {
+        Authorization: "Bearer " + jwt
+      },
+      url: "http://localhost:3000/private/comment",
+      data: {
+        data: { user: user, body: comment, targetid: id }
+      }
+    });
+    renderList(id);
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+//function to see all comments
+$(document).on("click", ".comment-counts", async function() {
+  const id = $(this).parentsUntil("#user-gallery")[2].id;
+  const commentList = $(
+    `<ul class='list-group list-group-flus text-dark mt-2'></ul>`
+  );
+  try {
+    const result = await axios({
+      method: "get",
+      headers: {
+        Authorization: "Bearer " + jwt
+      },
+      url: "http://localhost:3000/private/"
+    });
+    const lists = result.data.filter(el => el.id == id);
+    const el = lists[0].comments;
+    for (let j = 0; j < el.length; j++) {
+      if (el[j].user == user) {
+        commentList.append(
+          `<li class="list-group-item d-flex justify-content-between" id=${el[j].id}>${el[j].body} <div><button class="btn delete-comment">Delete</button></div></li>`
+        );
+      } else {
+        commentList.append(
+          `<li class="list-group-item" id=${el[j].id}>${el[j].body}</li>`
+        );
+      }
+    }
+    $("#" + id).html(commentList);
+    $("#" + id).append(`<button class="btn go-back my-4">back</button>`);
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+//function to back to playlist
+$(document).on("click", ".go-back", async function() {
+  const id = $(this).parents()[0].id;
+  renderList(id);
+});
+
+//function to update single list
+async function renderList(id) {
+  try {
+    const result = await axios({
+      method: "get",
+      headers: {
+        Authorization: "Bearer " + jwt
+      },
+      url: "http://localhost:3000/private/"
+    });
+    const lists = result.data;
+    const el = lists.filter(el => el.id == id);
+    const content = generateHTML(el[0]);
+    $("#" + id).replaceWith(content);
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+//function to delete a comment
+$(document).on("click", ".delete-comment", async function() {
+  const commentId = $(this).parent()[0].id;
+  const id = $(this).parents()[2].id;
+  try {
+    const delete_result = await axios({
+      method: "delete",
+      headers: {
+        Authorization: "Bearer " + jwt
+      },
+      data: {
+        data: {
+          playlist_id: id,
+          id: commentId
+        }
+      },
+      url: "http://localhost:3000/private/comment"
+    });
+    const commentList = $(
+      `<ul class='list-group list-group-flus text-dark mt-2'></ul>`
+    );
+    renderComment(commentList, id);
+    $("#" + id).html(commentList);
+    $("#" + id).append(`<button class="btn go-back my-4">back</button>`);
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+async function renderComment(commentList, id) {
+  try {
+    const result = await axios({
+      method: "get",
+      headers: {
+        Authorization: "Bearer " + jwt
+      },
+      url: "http://localhost:3000/private/"
+    });
+    const lists = result.data.filter(el => el.id == id);
+    const el = lists[0].comments;
+    for (let j = 0; j < el.length; j++) {
+      if (el[j].user == user) {
+        commentList.append(
+          `<li class="list-group-item d-flex justify-content-between" id=${el[j].id}>${el[j].body} <div><button class="btn delete-comment">Delete</button></div></li>`
+        );
+      } else {
+        commentList.append(
+          `<li class="list-group-item" id=${el[j].id}>${el[j].body}</li>`
+        );
+      }
+    }
+  } catch (error) {
+    console.log(error);
+  }
+}
