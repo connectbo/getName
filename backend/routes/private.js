@@ -63,7 +63,8 @@ router.post('/comment', parsePost, function (req, res) {
   let playlists = privateStore['_data']['playlists'];
   const _comment = {
     "user": req.body.data.user,
-    "body": req.body.data.body
+    "body": req.body.data.body,
+    "id": Math.floor((Math.random() * 10000000) + 1)
   }
   const _targetid = req.body.data.targetid;
   for (let i in playlists) {
@@ -73,7 +74,27 @@ router.post('/comment', parsePost, function (req, res) {
       break;
     }
   }
-  res.sendStatus(200);
+  res.sendStatus(200)
+})
+
+
+router.delete('/comment', parsePost, function (req, res) {
+  const result = req.handlePost(privateStore);
+  let playlists = privateStore['_data']['playlists'];
+  const _commentid = req.body.data.id;
+  const _playlistid = req.body.data.playlist_id;
+  for (let i in playlists) {
+    if(playlists[i]['id'] == _playlistid){
+      for (let j in playlists[i]['comments']){
+        if (playlists[i]['comments'][j]['id'] == _commentid) {
+          playlists[i]['comments'].splice(j, 1);
+          privateStore.set('playlists', playlists);
+          break;
+        }
+      }
+    }
+  }
+  res.sendStatus(200)
 })
 
 router.post('/store_playlist', parsePost, function (req, res) {
