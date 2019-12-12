@@ -71,10 +71,12 @@ router.post('/comment', parsePost, function (req, res) {
     if (playlists[i]['id'] == _targetid) {
       playlists[i]['comments'].push(_comment);
       privateStore.set('playlists', playlists);
+      const toReturn = {};
+      toReturn[_comment['id']] = "OK"
+      res.send(toReturn)
       break;
     }
   }
-  res.sendStatus(200)
 })
 
 
