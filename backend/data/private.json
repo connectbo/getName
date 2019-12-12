@@ -9,11 +9,11 @@
     "targetid": "37i9dQZF1DXcBWIGoYBM5M"
   },
   "like": {
-    "id": "37i9dQZF1DXcBWIGoYBM5M",
+    "id": "7d8ed8mfZruJjHDqhkvnet",
     "user": "meng"
   },
   "unlike": {
-    "id": "4TWyptkhzzavlgoOQXsOTr"
+    "term": "what"
   },
   "playlists": [
     {
@@ -52,7 +52,9 @@
       "type": "playlist",
       "uri": "spotify:playlist:37i9dQZF1DXcBWIGoYBM5M",
       "app_username": "bo",
-      "likes": [],
+      "likes": [
+        "meng"
+      ],
       "comments": [
         {
           "user": "meng",
@@ -112,7 +114,9 @@
       "type": "playlist",
       "uri": "spotify:playlist:4TWyptkhzzavlgoOQXsOTr",
       "app_username": "bo",
-      "likes": [],
+      "likes": [
+        "meng"
+      ],
       "comments": []
     },
     {
@@ -161,7 +165,9 @@
       "type": "playlist",
       "uri": "spotify:playlist:57jiFXnQIluOCpKnS0dGcF",
       "app_username": "bo",
-      "likes": [],
+      "likes": [
+        "meng"
+      ],
       "comments": []
     },
     {
@@ -298,7 +304,9 @@
       "type": "playlist",
       "uri": "spotify:playlist:0crJQUz1j4UYjYGvYKG7d8",
       "app_username": "bo",
-      "likes": [],
+      "likes": [
+        "meng"
+      ],
       "comments": []
     },
     {
