@@ -46,6 +46,7 @@ async function renderPage(username, password, jwt) {
         pass: password
       }
     });
+
     const user = account.data.user.name;
     $("nav .container").append(`
     <div class="py-2 d-none d-md-inline-block">
@@ -53,7 +54,51 @@ async function renderPage(username, password, jwt) {
     <span class="text-white mx-3">/</span>
     <a class="text-white" href="../account/account.html" id="account">My Account</a>
   </div>`);
+
+    const result = await axios({
+      method: "get",
+      headers: {
+        Authorization: "Bearer " + jwt
+      },
+      url: "http://localhost:3000/private/"
+    });
+    console.log(result);
+    const lists = result.data;
+    for (let i = 0; i < lists.length; i++) {
+      const htmlToAdd = generateHTML(lists[i]);
+      $("#user-gallery").append(htmlToAdd);
+    }
   } catch (error) {
     console.log(error);
   }
 }
+
+function generateHTML(el) {
+  const htmlToAdd = `<div class="col-md-4 col-lg-3 bg-dark mx-5 mt-2 mb-4 text-center text-white rounded shadow" id=${el.id}>
+    <div class="my-3 py-3" >
+      <h2 class="display-5">
+      ${el.name}</h2> 
+    </div>
+    <div
+      class="bg-light box-shadow mx-auto"
+      style="width: 60%; height: 200px; border-radius: 21px 21px 0 0;
+      background: url(${el.images[0].url});background-position: center; 
+      background-repeat: no-repeat; 
+      background-size: cover;"
+    ></div>
+    <div class="text-white my-4 row">
+    <div class="col-5 d-flex align-items-center flex-row">
+    <span class="mx-3 like-counts" > ${el.likes} Likes</span>
+    <i class="far fa-heart clickable p-2 rounded like" ></i></div>
+    <div class="col-7 d-flex align-items-center flex-row">
+    <span class="mx-3 comment-counts clickable p-1 rounded" > ${el.comments.length} Comments</span>
+    <i class="far fa-comment clickable p-2 rounded comments" ></i></div>
+    </div>
+    </div>`;
+  return htmlToAdd;
+}
+
+$(document).on("click", ".comments", async function() {
+  const id = $(this).parentsUntil("#user-gallery")[2].id;
+  const commentHTML = ``;
+});
