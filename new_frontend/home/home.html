@@ -36,14 +36,17 @@
       </h4>
       <hr class="shadow" />
       <div class="container">
-        <div class="row justify-content-center my-5">
-          <input type="text" class="form-control col-7 mx-3" id="search-list" />
-          <button class="btn bg-dark text-white col-3 mx-5" id="submit-search">
-            Search Playlist
-          </button>
+        <div class="row justify-content-center mt-5">
+          <input
+            type="text"
+            class="form-control col-7 mx-3 mb-2"
+            placeholder="search playlist here"
+            id="search-list"
+          />
         </div>
+        <div id="show-suggestion"></div>
       </div>
-      <div class="row justify-content-center" id="user-gallery"></div>
+      <div class="row justify-content-center mt-3" id="user-gallery"></div>
     </div>
     <script src="../node_modules/jquery/dist/jquery.js"></script>
     <script src="../node_modules/axios/dist/axios.js"></script>

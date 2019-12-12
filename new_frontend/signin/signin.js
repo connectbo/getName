@@ -17,7 +17,7 @@ $("#submit-form").click(async function() {
     setCookie("jwt", jwt, 30);
     window.location.href = "../home/home.html";
   } catch (error) {
-    $("#warning").text("wrong email address or password");
+    $("#warning").text("wrong username or password");
     console.log(error);
   }
 });

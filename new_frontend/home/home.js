@@ -331,7 +331,23 @@ $("#search-list").on("keydown", debounce(getSuggestion, 500));
 
 async function getSuggestion() {
   const searchWords = $(this).val();
-  console.log(searchWords);
+  if (searchWords == "") {
+    const result0 = await axios({
+      method: "get",
+      headers: {
+        Authorization: "Bearer " + jwt
+      },
+      url: "http://localhost:3000/private/"
+    });
+    const lists = result0.data;
+    $("#user-gallery").empty();
+    for (let i = 0; i < lists.length; i++) {
+      const htmlToAdd = generateHTML(lists[i]);
+      $("#user-gallery").append(htmlToAdd);
+    }
+    $("#show-suggestion").empty();
+    return "";
+  }
   try {
     const result = await axios({
       method: "get",
@@ -339,17 +355,31 @@ async function getSuggestion() {
         Authorization: "Bearer " + jwt
       },
       url: "http://localhost:3000/private/search",
-      data: {
-        data: {
-          term: searchWords
-        }
+      params: {
+        term: searchWords
       }
     });
-    console.log(result);
+    $("#show-suggestion").empty();
+    for (let i = 0; i < result.data._suggestion.length; i++) {
+      $("#show-suggestion").append(`<p>${result.data._suggestion[i]}</p>`);
+    }
+
+    const result2 = await axios({
+      method: "get",
+      headers: {
+        Authorization: "Bearer " + jwt
+      },
+      url: "http://localhost:3000/private/"
+    });
+    const lists = result2.data;
+    $("#user-gallery").empty();
+    for (let i = 0; i < lists.length; i++) {
+      if (result.data._suggestion.includes(lists[i].name)) {
+        const htmlToAdd = generateHTML(lists[i]);
+        $("#user-gallery").append(htmlToAdd);
+      }
+    }
   } catch (error) {
     console.log(error);
   }
 }
-
-// //function to search playlist
-// $(document).on("click", "submit-search", function() {});
