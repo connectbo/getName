@@ -121,8 +121,8 @@ router.post('/store_playlist', parsePost, function (req, res) {
         formatted_playlist[i]['likes'] = 0;
         formatted_playlist[i]['comments'] = new Array();
       }
-      pre_playlist.push(formatted_playlist);
-      privateStore.set(`playlists`, pre_playlist)
+      let final_array = pre_playlist.concat(formatted_playlist);
+      privateStore.set(`playlists`, final_array)
     })
   if (typeof result !== 'undefined') {
     res.send({ result })
